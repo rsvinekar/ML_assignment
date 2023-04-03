@@ -6,6 +6,7 @@ output:
   html_document:
     toc: true
     theme: lumen
+
 ---
 
 ```{r setup, include=FALSE}
@@ -139,6 +140,8 @@ The model itself can be checked by its plots
 ```{r fig.cap="We can see the increase in estimated accuracy as the boosting iterations are increased" }
 ggplot(gbmFit1)
 ```
+
+The plots indicate a very high level of accuracy $>99$%, and the out of sample error should thus be very low. Since we do not know the expected outcome, it is difficult to verify, but it is likely the error is negligible, so long as the variables are measured in the same conditions.
 
 # Application of the model
 

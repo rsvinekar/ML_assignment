@@ -472,18 +472,18 @@ testing &lt;- maindata[-inTrain,]</code></pre>
 cMpred_rpart$table</code></pre>
 <pre><code>##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1260  386  372  347   84
-##          B   16  317   19  130   69
-##          C   88  226  447  280  179
+##          A 1243  398  394  332   95
+##          B   20  316   22  139   61
+##          C  100  215  422  289  176
 ##          D    0    0    0    0    0
-##          E    3    0    0   29  550</code></pre>
+##          E    4    0    0   26  550</code></pre>
 <pre class="r"><code>cMpred_rpart$overall</code></pre>
 <pre><code>##       Accuracy          Kappa  AccuracyLower  AccuracyUpper   AccuracyNull 
-##   5.360267e-01   3.943081e-01   5.217991e-01   5.502104e-01   2.846731e-01 
+##   5.270721e-01   3.823587e-01   5.128339e-01   5.412772e-01   2.846731e-01 
 ## AccuracyPValue  McnemarPValue 
-##  4.978127e-291   0.000000e+00</code></pre>
+##  1.869346e-271   0.000000e+00</code></pre>
 <p>Clearly the Classification and Regression Trees (CART) model is not
-very accurate with 53.6026656% accuracy by default. It may work with
+very accurate with 52.7072053% accuracy by default. It may work with
 some tweaking. Other methods like “glm” or “lm” do not work as the
 number of variables is very large, or in case of “glm”, the output
 levels are too many.</p>
@@ -499,15 +499,15 @@ use this technique as it is perfect for the use-case we have.</p>
 cMpred_gbm$table</code></pre>
 <pre><code>##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1367    7    0    0    0
-##          B    0  918    1    3    2
-##          C    0    4  836    6    2
-##          D    0    0    1  777    7
-##          E    0    0    0    0  871</code></pre>
+##          A 1366   10    0    0    0
+##          B    1  915    5    4    1
+##          C    0    4  833    9    2
+##          D    0    0    0  773   10
+##          E    0    0    0    0  869</code></pre>
 <pre class="r"><code>cMpred_gbm$overall[1:2]</code></pre>
 <pre><code>##  Accuracy     Kappa 
-## 0.9931279 0.9913058</code></pre>
-<p>We can see that the training confusionmatrix gives 99.3127863%
+## 0.9904207 0.9878800</code></pre>
+<p>We can see that the training confusionmatrix gives 99.0420658%
 accuracy. This is much better than “rpart”. Thus we can use the “gbm”
 model for our final analysis</p>
 </div>
@@ -539,15 +539,15 @@ case. We can check it out anyway:</p>
 cMpred_gbm1$table</code></pre>
 <pre><code>##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1367    7    0    0    0
-##          B    0  918    2    1    0
-##          C    0    4  834    5    1
-##          D    0    0    2  779    4
-##          E    0    0    0    1  877</code></pre>
+##          A 1367    7    0    1    0
+##          B    0  913    3    2    0
+##          C    0    9  835    5    2
+##          D    0    0    0  778    5
+##          E    0    0    0    0  875</code></pre>
 <pre class="r"><code>cMpred_gbm1$overall[1:2]</code></pre>
 <pre><code>##  Accuracy     Kappa 
-## 0.9943773 0.9928866</code></pre>
-<p>The 99.4377343% accuracy is much better, but this is expected as the
+## 0.9929196 0.9910422</code></pre>
+<p>The 99.2919617% accuracy is much better, but this is expected as the
 training set contained the test set, so this increase is really
 meaningless. The model itself can be checked by its plots</p>
 <pre class="r"><code>ggplot(gbmFit1)</code></pre>
@@ -558,6 +558,10 @@ We can see the increase in estimated accuracy as the boosting iterations
 are increased
 </p>
 </div>
+<p>The plots indicate a very high level of accuracy <span class="math inline">\(&gt;99\)</span>%, and the out of sample error
+should thus be very low. Since we do not know the expected outcome, it
+is difficult to verify, but it is likely the error is negligible, so
+long as the variables are measured in the same conditions.</p>
 </div>
 <div id="application-of-the-model" class="section level1">
 <h1>Application of the model</h1>
