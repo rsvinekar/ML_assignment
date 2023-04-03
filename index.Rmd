@@ -3,7 +3,6 @@ title: "ML Assignment"
 author: "Rithvik"
 date: "`r Sys.Date()`"
 output: 
- github_document
  html_document:
     toc: true
     theme: lumen
