@@ -3,9 +3,12 @@ ML Assignment
 Rithvik
 2023-04-03
 
+This document is also available as HTML in the [ml.html](ml.html) file. 
+However, it may be more convenient to check out this readme instead. 
+Apart from this message and a table of contents, it is the same
+
 # Introduction
 
-This document is also available as HTML in the [ml.html](ml.html) file.
 This document describes use of ML models for prediction of exercise type
 in a given dataset called the Weight Lifting Exercise Dataset. The data
 was collected from accelerometers on the belt, forearm, arm, and dumbell
