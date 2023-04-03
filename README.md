@@ -5,6 +5,7 @@ Rithvik
 
 # Introduction
 
+This document is also available as HTML in the (ml.html) file.
 This document describes use of ML models for prediction of exercise type
 in a given dataset called the Weight Lifting Exercise Dataset. The data
 was collected from accelerometers on the belt, forearm, arm, and dumbell
