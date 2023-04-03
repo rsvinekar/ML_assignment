@@ -2,11 +2,9 @@
 title: "ML Assignment"
 author: "Rithvik"
 date: "`r Sys.Date()`"
-output:
+output: 
   html_document:
     toc: true
-    toc_depth: 3
-    number_sections: true
     theme: lumen
 ---
 
@@ -25,9 +23,8 @@ For this purpose, we need to load the dataset, train an ML model and use the mod
 
 The data is downloaded and loaded as `maindata` and `outsample` using read.csv and default options.
 ```{r}
-urlpath <- "https://d396qusza40orc.cloudfront.net/predmachlearn/"
-maindata <- read.csv(paste(urlpath,"pml-training.csv", sep=""))
-outsample <- read.csv(paste(urlpath,"pml-testing.csv",sep=""))
+maindata <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv")
+outsample <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv")
 ```
 
 ## Clean data
@@ -58,7 +55,7 @@ We can make factor variable out of the classe column.
 ```{r}
 maindata$classe <- as.factor(maindata$classe)
 ```
-The new dataset is now defined as dim(maindata)=`r dim(maindata)`. And the outsample is dim(outsample)=`r dim(outsample)`. Thus we have 54 variables in both. There are 19216 entries in the maindata for training.
+The new dataset is now defined as dim(maindata)=`r dim(maindata)`. And the outsample is dim(outsample)=`r dim(outsample)`. Thus we have `r dim(outsample)[2]` variables in both. There are `dim(maindata)[1]` entries in the maindata for training.
 
 # Machine learning
 

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Rithvik" />
 
-<meta name="date" content="2023-04-03" />
+<meta name="date" content="2023-04-04" />
 
 <title>ML Assignment</title>
 
@@ -376,27 +376,30 @@ display: none;
 
 <h1 class="title toc-ignore">ML Assignment</h1>
 <h4 class="author">Rithvik</h4>
-<h4 class="date">2023-04-03</h4>
+<h4 class="date">2023-04-04</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction" id="toc-introduction"><span class="toc-section-number">1</span> Introduction</a></li>
-<li><a href="#data-loading-and-cleaning" id="toc-data-loading-and-cleaning"><span class="toc-section-number">2</span> Data loading and cleaning</a>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#data-loading-and-cleaning" id="toc-data-loading-and-cleaning">Data loading and cleaning</a>
 <ul>
-<li><a href="#download-data" id="toc-download-data"><span class="toc-section-number">2.1</span> Download data</a></li>
-<li><a href="#clean-data" id="toc-clean-data"><span class="toc-section-number">2.2</span> Clean data</a></li>
+<li><a href="#download-data" id="toc-download-data">Download
+data</a></li>
+<li><a href="#clean-data" id="toc-clean-data">Clean data</a></li>
 </ul></li>
-<li><a href="#machine-learning" id="toc-machine-learning"><span class="toc-section-number">3</span> Machine learning</a></li>
-<li><a href="#cross-validation" id="toc-cross-validation"><span class="toc-section-number">4</span> Cross Validation</a></li>
-<li><a href="#application-of-the-model" id="toc-application-of-the-model"><span class="toc-section-number">5</span> Application of the model</a></li>
-<li><a href="#conclusion" id="toc-conclusion"><span class="toc-section-number">6</span> Conclusion</a></li>
+<li><a href="#machine-learning" id="toc-machine-learning">Machine
+learning</a></li>
+<li><a href="#cross-validation" id="toc-cross-validation">Cross
+Validation</a></li>
+<li><a href="#application-of-the-model" id="toc-application-of-the-model">Application of the model</a></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
 </ul>
 </div>
 
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
 <p>This document describes use of ML models for prediction of exercise
 type in a given dataset called the Weight Lifting Exercise Dataset. The
 data was collected from accelerometers on the belt, forearm, arm, and
@@ -405,19 +408,17 @@ correctly and incorrectly in 5 different ways. <a href="http://groupware.les.inf
 purpose, we need to load the dataset, train an ML model and use the
 model to predict the exercise method for the test data.</p>
 </div>
-<div id="data-loading-and-cleaning" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Data loading and
-cleaning</h1>
-<div id="download-data" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Download data</h2>
+<div id="data-loading-and-cleaning" class="section level1">
+<h1>Data loading and cleaning</h1>
+<div id="download-data" class="section level2">
+<h2>Download data</h2>
 <p>The data is downloaded and loaded as <code>maindata</code> and
 <code>outsample</code> using read.csv and default options.</p>
-<pre class="r"><code>urlpath &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/&quot;
-maindata &lt;- read.csv(paste(urlpath,&quot;pml-training.csv&quot;, sep=&quot;&quot;))
-outsample &lt;- read.csv(paste(urlpath,&quot;pml-testing.csv&quot;,sep=&quot;&quot;))</code></pre>
+<pre class="r"><code>maindata &lt;- read.csv(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;)
+outsample &lt;- read.csv(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;)</code></pre>
 </div>
-<div id="clean-data" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Clean data</h2>
+<div id="clean-data" class="section level2">
+<h2>Clean data</h2>
 <p>We can use <code>View()</code> in RStudio to check the data.
 <code>dim(maindata)=</code>19622, 160 and
 <code>dim(outsample)=</code>20, 160. The number of columns is the same,
@@ -451,11 +452,12 @@ outsample &lt;- outsample[,-c(1:6)]</code></pre>
 <pre class="r"><code>maindata$classe &lt;- as.factor(maindata$classe)</code></pre>
 <p>The new dataset is now defined as dim(maindata)=19216, 54. And the
 outsample is dim(outsample)=20, 54. Thus we have 54 variables in both.
-There are 19216 entries in the maindata for training.</p>
+There are <code>dim(maindata)[1]</code> entries in the maindata for
+training.</p>
 </div>
 </div>
-<div id="machine-learning" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Machine learning</h1>
+<div id="machine-learning" class="section level1">
+<h1>Machine learning</h1>
 <p>We first load the library needed</p>
 <pre class="r"><code>library(caret)</code></pre>
 <p>First we will split the maindata into a training and test set, so we
@@ -470,18 +472,18 @@ testing &lt;- maindata[-inTrain,]</code></pre>
 cMpred_rpart$table</code></pre>
 <pre><code>##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1247  394  380  310   80
-##          B   21  301   25  141   77
-##          C   94  234  433  309  190
+##          A 1260  386  372  347   84
+##          B   16  317   19  130   69
+##          C   88  226  447  280  179
 ##          D    0    0    0    0    0
-##          E    5    0    0   26  535</code></pre>
+##          E    3    0    0   29  550</code></pre>
 <pre class="r"><code>cMpred_rpart$overall</code></pre>
 <pre><code>##       Accuracy          Kappa  AccuracyLower  AccuracyUpper   AccuracyNull 
-##   5.239484e-01   3.792269e-01   5.097076e-01   5.381599e-01   2.846731e-01 
+##   5.360267e-01   3.943081e-01   5.217991e-01   5.502104e-01   2.846731e-01 
 ## AccuracyPValue  McnemarPValue 
-##  8.755586e-265   0.000000e+00</code></pre>
+##  4.978127e-291   0.000000e+00</code></pre>
 <p>Clearly the Classification and Regression Trees (CART) model is not
-very accurate with 52.3948355% accuracy by default. It may work with
+very accurate with 53.6026656% accuracy by default. It may work with
 some tweaking. Other methods like “glm” or “lm” do not work as the
 number of variables is very large, or in case of “glm”, the output
 levels are too many.</p>
@@ -497,20 +499,20 @@ use this technique as it is perfect for the use-case we have.</p>
 cMpred_gbm$table</code></pre>
 <pre><code>##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1366    2    0    0    0
-##          B    0  921    6    3    1
-##          C    0    6  831    8    0
-##          D    1    0    1  775    3
-##          E    0    0    0    0  878</code></pre>
+##          A 1367    7    0    0    0
+##          B    0  918    1    3    2
+##          C    0    4  836    6    2
+##          D    0    0    1  777    7
+##          E    0    0    0    0  871</code></pre>
 <pre class="r"><code>cMpred_gbm$overall[1:2]</code></pre>
 <pre><code>##  Accuracy     Kappa 
-## 0.9935444 0.9918336</code></pre>
-<p>We can see that the training confusionmatrix gives 99.3544357%
+## 0.9931279 0.9913058</code></pre>
+<p>We can see that the training confusionmatrix gives 99.3127863%
 accuracy. This is much better than “rpart”. Thus we can use the “gbm”
 model for our final analysis</p>
 </div>
-<div id="cross-validation" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Cross Validation</h1>
+<div id="cross-validation" class="section level1">
+<h1>Cross Validation</h1>
 <p>There are many methods for cross validation. One we have already
 used, by partitioning the data into training and testing sets. However,
 we can use more rigorous methods on the whole maindata so that we can
@@ -537,15 +539,15 @@ case. We can check it out anyway:</p>
 cMpred_gbm1$table</code></pre>
 <pre><code>##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1366    3    0    0    0
-##          B    0  919    4    3    0
-##          C    0    7  832    4    0
-##          D    1    0    2  779    1
-##          E    0    0    0    0  881</code></pre>
+##          A 1367    7    0    0    0
+##          B    0  918    2    1    0
+##          C    0    4  834    5    1
+##          D    0    0    2  779    4
+##          E    0    0    0    1  877</code></pre>
 <pre class="r"><code>cMpred_gbm1$overall[1:2]</code></pre>
 <pre><code>##  Accuracy     Kappa 
-## 0.9947938 0.9934142</code></pre>
-<p>The 99.4793836% accuracy is much better, but this is expected as the
+## 0.9943773 0.9928866</code></pre>
+<p>The 99.4377343% accuracy is much better, but this is expected as the
 training set contained the test set, so this increase is really
 meaningless. The model itself can be checked by its plots</p>
 <pre class="r"><code>ggplot(gbmFit1)</code></pre>
@@ -557,9 +559,8 @@ are increased
 </p>
 </div>
 </div>
-<div id="application-of-the-model" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Application of the
-model</h1>
+<div id="application-of-the-model" class="section level1">
+<h1>Application of the model</h1>
 <p>The model can now be applied to our ‘outsample’</p>
 <pre class="r"><code>pred_prob &lt;- predict(gbmFit1, newdata = outsample, type = &quot;prob&quot;)
 pred_prob</code></pre>
@@ -612,8 +613,8 @@ pred_mat</code></pre>
 <p>And the predictions themselves can be easily obtained using
 <code>type = &quot;raw&quot;</code></p>
 </div>
-<div id="conclusion" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Conclusion</h1>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
 <p>The final prediction is given in the <strong>classe</strong> column
 below:</p>
 <pre class="r"><code>pred_final &lt;- predict(gbmFit1, newdata = outsample, type = &quot;raw&quot;)
